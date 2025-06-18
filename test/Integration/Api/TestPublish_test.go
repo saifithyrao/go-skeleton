@@ -67,4 +67,26 @@ func TestPublish(t *testing.T) {
 
 	})
 
+	t.Run("BadRequest", func(t *testing.T) {
+		gin.SetMode(gin.TestMode)
+		app := gin.Default()
+		routes := config.NewRoutes()
+		routes.SetUpRoutes(app)
+
+		formData := url.Values{}
+
+		req, err := http.NewRequest("POST", "/api/publish", strings.NewReader(formData.Encode()))
+		if err != nil {
+			t.Fatal(err)
+		}
+		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+		rec := httptest.NewRecorder()
+		app.ServeHTTP(rec, req)
+
+		if rec.Code != http.StatusBadRequest {
+			t.Errorf("expected status %d but got %d", http.StatusBadRequest, rec.Code)
+		}
+	})
+
 }
