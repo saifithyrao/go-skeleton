@@ -12,11 +12,11 @@ func main() {
 	routes := config.NewRoutes()
 	routes.SetUpRoutes(app)
 
+	fmt.Println("start.")
+
 	err := app.Run(":8000")
 	if err != nil {
 		return
 	}
-
-	fmt.Println("start.")
 
 }
