@@ -30,7 +30,7 @@ To run the consumer, first, get shell access to the Go container and then execut
 
 ```sh
 # Access the Go container
-docker exec -it rabbitmq_go sh
+docker exec -it grd1_go sh
 
 # Run the consumer command
 go run cli/command.go fibonacci
